@@ -1,5 +1,28 @@
 import express from 'express';
 import cors from 'cors';
+//import mongoose from 'mongoose';
+import fetch from 'isomorphic-fetch';
+//import Promise from 'bluebird';
+
+//mongoose.Promise = Promise;
+//mongoose.connect('mongodb://publicdb.mgbeta.ru/agurin_skb3');
+//const Cat = mongoose.model('Cat', {
+//  name: String
+//});
+
+
+//fetch.Promise = Promise;
+
+const pcUrl = 'https://gist.githubusercontent.com/isuvorov/ce6b8d87983611482aac89f6d7bc0037/raw/pc.json';
+
+let pc = {};
+
+fetch(pcUrl).then(async (res) => {
+  pc = await res.json();
+  return '123'
+}).catch(err => {
+  console.log('Чтото пошло не так:', err);
+});
 
 const app = express();
 app.use(cors());
@@ -60,6 +83,18 @@ app.get('/task2B', (req, res) => {
   }
 
   res.send(result);
+});
+
+app.get('/task3A', (req, res) => {
+  //fetch(pcUrl).then(async (res) => {
+  //  pc = await res.json();
+  //  return '123'
+  //}).catch(err => {
+  //  console.log('Чтото пошло не так:', err);
+  //});
+
+  res.send("task3A");
+
 });
 
 app.listen(3000, () => {
